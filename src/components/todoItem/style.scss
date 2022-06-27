@@ -1,0 +1,62 @@
+@use "src/styles/sass/includes.scss" as *;
+
+$component: "todo-item-component";
+
+.#{$component} {
+  border-width: 1px;
+  border-left-width: 4px;
+  border-style: solid;
+  cursor: pointer;
+
+  & + .#{$component} {
+    margin-top: 10px;
+  }
+
+  &:hover {
+    & .#{$component}-expand {
+      &::before,
+      &::after {
+        @include setBgColor("prm-d");
+      }
+    }
+  }
+
+  .#{$component}-expand {
+    position: relative;
+    width: 15px;
+    height: 15px;
+    transition: transform $duration-base;
+
+    &::after,
+    &::before {
+      position: absolute;
+      display: block;
+      top: 0;
+      left: calc(15px / 2);
+      width: 2px;
+      height: 15px;
+      border-radius: 5px;
+      content: " ";
+      @include setBgColor("prm-sd");
+      transition: background-color $duration-base;
+    }
+    &::before {
+      transform: rotate(90deg);
+    }
+
+    &[data-expanded="true"] {
+      transform: rotate(45deg);
+    }
+  }
+  .#{$component}-expandable {
+    overflow: hidden;
+    height: 0;
+    max-height: 0;
+    transition: max-height $duration-base;
+
+    &[data-expanded="true"] {
+      height: auto;
+      max-height: 1000px;
+    }
+  }
+}

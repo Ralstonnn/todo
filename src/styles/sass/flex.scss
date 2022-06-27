@@ -1,0 +1,143 @@
+@use "./includes.scss" as *;
+
+.flex {
+  display: flex;
+  height: fit-content;
+
+  &.flex-a {
+    &-center {
+      align-items: center;
+    }
+  }
+
+  &.flex-j {
+    &-center {
+      justify-content: center;
+    }
+
+    &-space-between {
+      justify-content: space-between;
+    }
+
+    &-space-evenly {
+      justify-content: space-evenly;
+    }
+  }
+
+  &.flex-o {
+    &-vertical {
+      flex-direction: column;
+
+      &-reverse {
+        flex-direction: column-reverse;
+      }
+    }
+    &-horizontal {
+      flex-direction: row;
+
+      &-reverse {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+
+  &.flex-wrap {
+    flex-wrap: wrap;
+  }
+  @each $name, $value in $breakpoints {
+    @media screen and (max-width: $value) {
+      &.flex-#{$name}-wrap {
+        flex-wrap: wrap;
+      }
+
+      &.flex-#{$name}-a {
+        &-center {
+          align-items: center;
+        }
+      }
+
+      &.flex-#{$name}-j {
+        &-center {
+          justify-content: center;
+        }
+
+        &-space-between {
+          justify-content: space-between;
+        }
+
+        &-space-evenly {
+          justify-content: space-evenly;
+        }
+      }
+
+      &.flex-#{$name}-o {
+        &-vertical {
+          flex-direction: column;
+
+          &-reverse {
+            flex-direction: column-reverse;
+          }
+        }
+        &-horizontal {
+          flex-direction: row;
+
+          &-reverse {
+            flex-direction: row-reverse;
+          }
+        }
+      }
+    }
+  }
+
+  .flex-item {
+    @each $name, $item in $flex-items {
+      &.flex-item-#{$name} {
+        width: $item;
+      }
+    }
+
+    @include flexItemMedia();
+
+    &.flex-item {
+      &-a-s-center {
+        align-self: center;
+      }
+      &-a-s-start {
+        align-self: flex-start;
+      }
+      &-a-s-end {
+        align-self: flex-end;
+      }
+
+      &-j-s-end {
+        margin-left: auto;
+      }
+      &-j-s-start {
+        margin-right: auto;
+      }
+      &-j-s-center {
+        margin: auto;
+      }
+    }
+  }
+
+  &.flex-grow {
+    @each $name, $value in $flex-grow {
+      &-#{$name} {
+        flex-grow: $value;
+      }
+    }
+  }
+
+  @each $name, $ind in $indents {
+    &.flex-gap-#{$name} {
+      gap: $ind;
+    }
+    &.flex-gap-c-#{$name} {
+      column-gap: $ind;
+    }
+    &.flex-gap-r-#{$name} {
+      row-gap: $ind;
+    }
+  }
+}
