@@ -34,7 +34,9 @@ jobs:
           PARSE_HOST_URL: ${{ secrets.PARSE_HOST_URL }}
           PARSE_JAVASCRIPT_KEY: ${{ secrets.PARSE_JAVASCRIPT_KEY }}
     - name: Deploy 
+      uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
+        GITHUB_TOKEN: ${{ secret.GITHUB_TOKEN }}
         BRANCH: back4app
         FOLDER: build
       
