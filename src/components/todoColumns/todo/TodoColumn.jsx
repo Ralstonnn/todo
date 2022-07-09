@@ -20,6 +20,12 @@ export function TodoColumn({ data, forceUpdate }) {
     });
   };
 
+  const deleteCallback = (id) => {
+    new Api({ id }).deleteTodo().then((data) => {
+      if (data.response === "y") forceUpdate();
+    });
+  };
+
   const addTodoCallback = (todo = "") => {
     new Api({ text: todo }).addTodo().then((data) => {
       if (data.response === "y") forceUpdate();
@@ -44,6 +50,7 @@ export function TodoColumn({ data, forceUpdate }) {
           btnCallback1={moveToInProgressCallback}
           btnText2={"Move to done"}
           btnCallback2={moveToDoneCallback}
+          deleteCallback={deleteCallback}
         />
         <AddItem
           className={"m-t-20"}

@@ -10,6 +10,12 @@ export function InProgressColumn({ data, forceUpdate }) {
     });
   };
 
+  const deleteCallback = (id) => {
+    new Api({ id }).deleteTodo().then((data) => {
+      if (data.response === "y") forceUpdate();
+    });
+  };
+
   const moveToDoneCallback = (id) => {
     new Api({ id }).moveToDone().then((data) => {
       if (data.response === "y") forceUpdate();
@@ -35,6 +41,7 @@ export function InProgressColumn({ data, forceUpdate }) {
           btnCallback1={moveToToDo}
           btnText2={"Move to Done"}
           btnCallback2={moveToDoneCallback}
+          deleteCallback={deleteCallback}
         />
       </div>
     </div>

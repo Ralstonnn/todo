@@ -25,9 +25,7 @@ export function TodoItemContainer({
           btnCallback1={() => btnCallback1(item.id)}
           btnText2={btnText2}
           btnCallback2={() => btnCallback2(item.id)}
-          deleteCallback={
-            item.doneColumn ? () => deleteCallback(item.id) : null
-          }
+          deleteCallback={() => deleteCallback(item.id)}
         />
       ))}
     </div>
