@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment: backForApp
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build
+        run: |
+          npm install
+          npm run-script build
+        env:
+          REACT_APP_PARSE_APPLICATION_ID: ${{ secrets.PARSE_APPLICATION_ID }}
+          REACT_APP_PARSE_HOST_URL: ${{ secrets.PARSE_HOST_URL }}
+          REACT_APP_PARSE_JAVASCRIPT_KEY: ${{ secrets.PARSE_JAVASCRIPT_KEY }}
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build

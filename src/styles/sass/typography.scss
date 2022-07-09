@@ -1,0 +1,340 @@
+@use "./includes.scss" as *;
+@use "sass:map";
+
+// INDENTS
+@each $name, $ind in $indents {
+  .p-#{$name} {
+    padding: $ind;
+  }
+  .p-v-#{$name} {
+    padding-top: $ind;
+    padding-bottom: $ind;
+  }
+  .p-h-#{$name} {
+    padding-left: $ind !important;
+    padding-right: $ind !important;
+  }
+  .p-t-#{$name} {
+    padding-top: $ind;
+  }
+  .p-b-#{$name} {
+    padding-bottom: $ind;
+  }
+  .p-r-#{$name} {
+    padding-right: $ind;
+  }
+  .p-l-#{$name} {
+    padding-left: $ind;
+  }
+
+  .m-#{$name} {
+    margin: $ind;
+  }
+  .m-v-#{$name} {
+    margin-top: $ind;
+    margin-bottom: $ind;
+  }
+  .m-h-#{$name} {
+    margin-left: $ind;
+    margin-right: $ind;
+  }
+  .m-t-#{$name} {
+    margin-top: $ind;
+  }
+  .m-b-#{$name} {
+    margin-bottom: $ind;
+  }
+  .m-r-#{$name} {
+    margin-right: $ind;
+  }
+  .m-l-#{$name} {
+    margin-left: $ind;
+  }
+
+  .m-ng-#{$name} {
+    margin: -$ind;
+  }
+  .m-ng-v-#{$name} {
+    margin-top: -$ind;
+    margin-bottom: -$ind;
+  }
+  .m-ng-h-#{$name} {
+    margin-left: -$ind;
+    margin-right: -$ind;
+  }
+  .m-ng-t-#{$name} {
+    margin-top: -$ind;
+  }
+  .m-ng-b-#{$name} {
+    margin-bottom: -$ind;
+  }
+  .m-ng-r-#{$name} {
+    margin-right: -$ind;
+  }
+  .m-ng-l-#{$name} {
+    margin-left: -$ind;
+  }
+}
+.ind-none {
+  padding: 0;
+  margin: 0;
+}
+@each $breakpointName, $breakpointValue in $breakpoints {
+}
+
+// POSITIONING
+.p-absolute {
+  position: absolute;
+}
+.p-relative {
+  position: relative;
+}
+
+// INPUTS
+input {
+  padding: 10px;
+  border-width: 1px;
+  border-style: solid;
+}
+textarea {
+  resize: none;
+  padding: 10px;
+  border: none;
+}
+
+button,
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  height: fit-content;
+  padding: 20px 40px;
+  background-color: map.get($colors, "prm");
+  border: none;
+  border-radius: 2px;
+  text-decoration: none;
+  font-size: 1.2rem;
+
+  &:hover {
+    background-color: map.get($colors, "prm-d");
+    color: map.get($colors, "prm-b");
+  }
+}
+
+.overflow {
+  &-y {
+    &-scroll {
+      overflow-y: scroll;
+    }
+  }
+}
+
+// BORDERS
+@each $name, $value in $border-round {
+  .border-r-#{$name} {
+    border-radius: #{$value};
+  }
+}
+
+// FONTS
+.font-weight-bold {
+  font-weight: bolder;
+}
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5 {
+  font-weight: bolder;
+}
+
+h1,
+.h1,
+.text-s1 {
+  font-size: 3rem;
+}
+h2,
+.h2,
+.text-s2 {
+  font-size: 2.5rem;
+}
+h3,
+.h3,
+.text-s3 {
+  font-size: 2rem;
+}
+h4,
+.h4,
+.text-s4 {
+  font-size: 1.75rem;
+}
+h5,
+.h5,
+.text-s5 {
+  font-size: 1.5rem;
+}
+h6,
+.h6,
+.text-s6 {
+  font-size: 1.25rem;
+}
+.text-small {
+  font-size: 0.75rem;
+}
+.text-nowrap {
+  white-space: nowrap;
+}
+
+// COLORS
+@each $name, $value in $colors {
+  .bg-#{$name} {
+    background-color: $value;
+
+    &-hover {
+      &:hover {
+        background-color: $value;
+      }
+    }
+  }
+
+  .border-color-#{$name} {
+    border-color: $value;
+  }
+
+  .text-color-#{$name} {
+    color: $value;
+
+    &-hover {
+      &:hover {
+        color: $value;
+      }
+    }
+  }
+
+  .btn-#{$name} {
+    background-color: $value;
+
+    &-hover {
+      &:hover {
+        color: $value;
+      }
+    }
+  }
+}
+
+// TEXT
+.text-align-center {
+  text-align: center;
+}
+
+@each $breakpointName, $breakpointValue in $breakpoints {
+  @media screen and (max-width: $breakpointValue) {
+    .text-#{$breakpointName}-align-center {
+      text-align: center;
+    }
+    @each $name, $ind in $indents {
+      .p-#{$breakpointName}-#{$name} {
+        padding: $ind;
+      }
+      .p-#{$breakpointName}-v-#{$name} {
+        padding-top: $ind;
+        padding-bottom: $ind;
+      }
+      .p-#{$breakpointName}-h-#{$name} {
+        padding-left: $ind !important;
+        padding-right: $ind !important;
+      }
+      .p-#{$breakpointName}-t-#{$name} {
+        padding-top: $ind;
+      }
+      .p-#{$breakpointName}-b-#{$name} {
+        padding-bottom: $ind;
+      }
+      .p-#{$breakpointName}-r-#{$name} {
+        padding-right: $ind;
+      }
+      .p-#{$breakpointName}-l-#{$name} {
+        padding-left: $ind;
+      }
+
+      .m-#{$breakpointName}-#{$name} {
+        margin: $ind;
+      }
+      .m-#{$breakpointName}-v-#{$name} {
+        margin-top: $ind;
+        margin-bottom: $ind;
+      }
+      .m-#{$breakpointName}-h-#{$name} {
+        margin-left: $ind;
+        margin-right: $ind;
+      }
+      .m-#{$breakpointName}-t-#{$name} {
+        margin-top: $ind;
+      }
+      .m-#{$breakpointName}-b-#{$name} {
+        margin-bottom: $ind;
+      }
+      .m-#{$breakpointName}-r-#{$name} {
+        margin-right: $ind;
+      }
+      .m-#{$breakpointName}-l-#{$name} {
+        margin-left: $ind;
+      }
+
+      .m-#{$breakpointName}-ng-#{$name} {
+        margin: -$ind;
+      }
+      .m-#{$breakpointName}-ng-v-#{$name} {
+        margin-top: -$ind;
+        margin-bottom: -$ind;
+      }
+      .m-#{$breakpointName}-ng-h-#{$name} {
+        margin-left: -$ind;
+        margin-right: -$ind;
+      }
+      .m-#{$breakpointName}-ng-t-#{$name} {
+        margin-top: -$ind;
+      }
+      .m-#{$breakpointName}-ng-b-#{$name} {
+        margin-bottom: -$ind;
+      }
+      .m-#{$breakpointName}-ng-r-#{$name} {
+        margin-right: -$ind;
+      }
+      .m-#{$breakpointName}-ng-l-#{$name} {
+        margin-left: -$ind;
+      }
+    }
+
+    .ind-#{$breakpointName}-none {
+      padding: 0;
+      margin: 0;
+    }
+
+    .text-#{$breakpointName}-s1 {
+      font-size: 3rem;
+    }
+    .text-#{$breakpointName}-s2 {
+      font-size: 2.5rem;
+    }
+    .text-#{$breakpointName}-s3 {
+      font-size: 2rem;
+    }
+    .text-#{$breakpointName}-s4 {
+      font-size: 1.75rem;
+    }
+    .text-#{$breakpointName}-s5 {
+      font-size: 1.5rem;
+    }
+    .text-#{$breakpointName}-s6 {
+      font-size: 1.25rem;
+    }
+  }
+}

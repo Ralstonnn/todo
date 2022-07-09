@@ -1,0 +1,9 @@
+@use "src/styles/sass/includes.scss" as *;
+
+$component: "home-component";
+
+.#{$component}-container {
+  & * {
+    @include setTextColor("prm-d");
+  }
+}

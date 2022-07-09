@@ -1,0 +1,60 @@
+@use "sass:map";
+
+$indents: (
+  "none": 0,
+);
+@for $i from 1 through 200 {
+  $indents: map.set($indents, #{$i}, #{$i}#{"px"});
+}
+
+$container-width: (
+  "1344": 1344px,
+);
+
+$breakpoints: (
+  "1024": 1024px,
+  "768": 768px,
+  "550": 550px,
+  "500": 500px,
+);
+
+$border-round: (
+  "2": 2px,
+  "5": 5px,
+  "10": 10px,
+  "20": 20px,
+  "25": 25px,
+  "50": 50px,
+  "half": 50%,
+);
+
+$flex-grow: ();
+@for $i from 1 through 10 {
+  $flex-grow: map.set($flex-grow, #{$i}, $i);
+}
+
+$flex-items: (
+  "1": 100%,
+  "2": calc(100% / 2),
+  "3": calc(100% / 3),
+  "4": calc(100% / 4),
+  "5": calc(100% / 5),
+  "6": calc(100% / 6),
+  "7": calc(100% / 7),
+  "8": calc(100% / 8),
+  "9": calc(100% / 9),
+  "10": calc(100% / 10),
+);
+
+$colors: (
+  "prm": #f2f2f2,
+  "prm-b": #fff,
+  "prm-sd": #c7c7c7,
+  "prm-d": #404040,
+  "ntr-r": #df563a,
+  "ntr-y": #f5c745,
+  "ntr-g": #9dc968,
+  "ntr-d": #000,
+);
+
+$duration-base: 0.3s;
