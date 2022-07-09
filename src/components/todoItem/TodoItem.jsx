@@ -16,9 +16,10 @@ export function TodoItem({
   const expand = useRef(null);
 
   const fadeOutAnim = () => {
-    todoItem.current.dataset.fadeIn = "false";
+    const item = todoItem.current;
+    item.dataset.fadeIn = "false";
     setTimeout(() => {
-      todoItem.current.dataset.active = "false";
+      item.dataset.active = "false";
     }, 300);
   };
 
