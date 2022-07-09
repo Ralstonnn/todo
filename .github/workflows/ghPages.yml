@@ -1,42 +1,38 @@
-# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+name: Deploy React Application
 
-name: ghPages
-
+# Controls when the action will run. 
 on:
+  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ "back4app" ]
+    branches: [ back4app ]
   pull_request:
-    branches: [ "back4app" ]
+    branches: [ back4app ]
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  backForApp:
+  build_test:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        node-version: [16.x] # We will deploy with only one version of node  
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - name: Build
-      run: |
-        npm i
-        npm run build 
-         env:
-          PARSE_APPLICATION_ID: ${{ secrets.PARSE_APPLICATION_ID }}
-          PARSE_HOST_URL: ${{ secrets.PARSE_HOST_URL }}
-          PARSE_JAVASCRIPT_KEY: ${{ secrets.PARSE_JAVASCRIPT_KEY }}
-    - name: Deploy 
-      uses: JamesIves/github-pages-deploy-action@releases/v3
-      with:
-        GITHUB_TOKEN: ${{ secret.GITHUB_TOKEN }}
-        BRANCH: back4app
-        FOLDER: build
-      
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm ci, build and test
+        run: |
+          npm ci
+          npm run build --if-present
+          npm test      
+      - name: deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.TOKEN }}
+          publish_dir: ./build         
