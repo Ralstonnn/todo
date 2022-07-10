@@ -7,10 +7,9 @@ Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_KEY);
 Parse.serverURL = PARSE_HOST_URL;
 
 export class Api {
-  constructor({ id = null, text = null, columnToChange = null } = {}) {
+  constructor({ id = null, text = null } = {}) {
     this.objectId = id;
     this.text = text;
-    this.columnToChange = columnToChange;
   }
 
   async addTodo() {

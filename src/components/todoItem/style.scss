@@ -7,6 +7,17 @@ $component: "todo-item-component";
   border-left-width: 4px;
   border-style: solid;
   cursor: pointer;
+  opacity: 0;
+  transition: opacity $duration-base ease-out;
+
+  &[data-fade-in="true"] {
+    opacity: 1;
+    transition: opacity $duration-base ease-in;
+  }
+
+  &[data-active="false"] {
+    display: none;
+  }
 
   & + .#{$component} {
     margin-top: 10px;

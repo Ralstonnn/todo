@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { Devider } from "../devider/Devider";
 import "./style.scss";
 
@@ -11,8 +11,22 @@ export function TodoItem({
   btnCallback2,
   deleteCallback,
 }) {
+  const todoItem = useRef(null);
   const expandable = useRef(null);
   const expand = useRef(null);
+
+  const fadeOutAnim = useCallback(() => {
+    todoItem.current.dataset.fadeIn = "false";
+    setTimeout(() => {
+      todoItem.current.dataset.active = "false";
+    }, 300);
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      todoItem.current.dataset.fadeIn = "true";
+    }, 10);
+  });
 
   return (
     <div
@@ -23,6 +37,7 @@ export function TodoItem({
         expandable.current.dataset.expanded = isExpanded ? "false" : "true";
         expand.current.dataset.expanded = isExpanded ? "false" : "true";
       }}
+      ref={todoItem}
     >
       <div className="flex-item flex-item-1 flex">
         <div>{text}</div>
@@ -43,13 +58,19 @@ export function TodoItem({
         <div>
           <button
             className="flex-item flex-item-1 text-smaller p-5"
-            onClick={btnCallback1}
+            onClick={() => {
+              fadeOutAnim();
+              btnCallback1();
+            }}
           >
             {btnText1}
           </button>
           <button
             className="flex-item flex-item-1 m-t-5 p-5"
-            onClick={btnCallback2}
+            onClick={() => {
+              fadeOutAnim();
+              btnCallback2();
+            }}
           >
             {btnText2}
           </button>
@@ -57,7 +78,10 @@ export function TodoItem({
           {deleteCallback !== null && (
             <button
               className="flex-item flex-item-1 m-t-5 p-5"
-              onClick={deleteCallback}
+              onClick={() => {
+                fadeOutAnim();
+                deleteCallback();
+              }}
             >
               Delete
             </button>
