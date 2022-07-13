@@ -1,27 +1,13 @@
 import { TodoItemContainer } from "../../todoItemContainer/TodoItemContainer";
 import { Devider } from "../../devider/Devider";
-import { Api } from "../../../api/api";
 import "./style.scss";
 
-export function InProgressColumn({ data, forceUpdate }) {
-  const moveToToDo = (id) => {
-    new Api({ id }).moveToTodo().then((data) => {
-      if (data.response === "y") forceUpdate();
-    });
-  };
-
-  const deleteCallback = (id) => {
-    new Api({ id }).deleteTodo().then((data) => {
-      if (data.response === "y") forceUpdate();
-    });
-  };
-
-  const moveToDoneCallback = (id) => {
-    new Api({ id }).moveToDone().then((data) => {
-      if (data.response === "y") forceUpdate();
-    });
-  };
-
+export function InProgressColumn({
+  data,
+  moveToToDoCallback,
+  moveToDoneCallback,
+  deleteCallback,
+}) {
   return (
     <div
       className="in-progress-column-component-container flex-item flex-item-3 
@@ -38,7 +24,7 @@ export function InProgressColumn({ data, forceUpdate }) {
           data={data}
           border="ntr-y"
           btnText1={"Move to ToDo"}
-          btnCallback1={moveToToDo}
+          btnCallback1={moveToToDoCallback}
           btnText2={"Move to Done"}
           btnCallback2={moveToDoneCallback}
           deleteCallback={deleteCallback}

@@ -3,34 +3,15 @@ import { Devider } from "../../devider/Devider";
 import "./style.scss";
 import { AddItem } from "../../addItem/AddItem";
 import { useState } from "react";
-import { Api } from "../../../api/api";
 
-export function TodoColumn({ data, forceUpdate }) {
+export function TodoColumn({
+  data,
+  moveToInProgressCallback,
+  moveToDoneCallback,
+  deleteCallback,
+  addTodoCallback,
+}) {
   const [showAddField, setShowAddField] = useState();
-
-  const moveToInProgressCallback = (id) => {
-    new Api({ id }).moveToInProgress().then((data) => {
-      if (data.response === "y") forceUpdate();
-    });
-  };
-
-  const moveToDoneCallback = (id) => {
-    new Api({ id }).moveToDone().then((data) => {
-      if (data.response === "y") forceUpdate();
-    });
-  };
-
-  const deleteCallback = (id) => {
-    new Api({ id }).deleteTodo().then((data) => {
-      if (data.response === "y") forceUpdate();
-    });
-  };
-
-  const addTodoCallback = (todo = "") => {
-    new Api({ text: todo }).addTodo().then((data) => {
-      if (data.response === "y") forceUpdate();
-    });
-  };
 
   return (
     <div

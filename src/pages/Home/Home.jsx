@@ -9,6 +9,36 @@ export function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
 
+  const moveToToDoCallback = (id) => {
+    new Api({ id }).moveToTodo().then((data) => {
+      if (data.response === "y") forceUpdate();
+    });
+  };
+
+  const moveToInProgressCallback = (id) => {
+    new Api({ id }).moveToInProgress().then((data) => {
+      if (data.response === "y") forceUpdate();
+    });
+  };
+
+  const moveToDoneCallback = (id) => {
+    new Api({ id }).moveToDone().then((data) => {
+      if (data.response === "y") forceUpdate();
+    });
+  };
+
+  const deleteCallback = (id) => {
+    new Api({ id }).deleteTodo().then((data) => {
+      if (data.response === "y") forceUpdate();
+    });
+  };
+
+  const addTodoCallback = (todo = "") => {
+    new Api({ text: todo }).addTodo().then((data) => {
+      if (data.response === "y") forceUpdate();
+    });
+  };
+
   useEffect(() => {
     const result = new Api().getTodos();
     result.then((data) => {
@@ -31,10 +61,30 @@ export function Home() {
   if (isLoading) return;
   return (
     <div className="home-component-container container-1344 flex">
+      {console.log("update")}
       <div className="flex-item flex-item-1 flex flex-wrap m-ng-5">
-        <TodoColumn data={data.todo} forceUpdate={forceUpdate} />
-        <InProgressColumn data={data.inProgress} forceUpdate={forceUpdate} />
-        <DoneColumn data={data.done} forceUpdate={forceUpdate} />
+        <TodoColumn
+          data={data.todo}
+          forceUpdate={forceUpdate}
+          moveToInProgressCallback={moveToInProgressCallback}
+          moveToDoneCallback={moveToDoneCallback}
+          deleteCallback={deleteCallback}
+          addTodoCallback={addTodoCallback}
+        />
+        <InProgressColumn
+          data={data.inProgress}
+          forceUpdate={forceUpdate}
+          moveToToDo={moveToToDoCallback}
+          moveToDone={moveToDoneCallback}
+          deleteCallback={deleteCallback}
+        />
+        <DoneColumn
+          data={data.done}
+          forceUpdate={forceUpdate}
+          moveToDone={moveToToDoCallback}
+          moveToInProgress={moveToInProgressCallback}
+          deleteCallback={deleteCallback}
+        />
       </div>
     </div>
   );
