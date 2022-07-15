@@ -28,10 +28,10 @@ export function TodoColumn({
           className={"m-t-20"}
           data={data}
           btnText1={"Move to InProgress"}
-          btnCallback1={moveToInProgressCallback}
+          btnCallback1={(id) => moveToInProgressCallback(id)}
           btnText2={"Move to done"}
-          btnCallback2={moveToDoneCallback}
-          deleteCallback={deleteCallback}
+          btnCallback2={(id) => moveToDoneCallback(id)}
+          deleteCallback={(id) => deleteCallback(id)}
         />
         <AddItem
           className={"m-t-20"}

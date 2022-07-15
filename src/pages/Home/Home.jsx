@@ -66,24 +66,24 @@ export function Home() {
         <TodoColumn
           data={data.todo}
           forceUpdate={forceUpdate}
-          moveToInProgressCallback={moveToInProgressCallback}
-          moveToDoneCallback={moveToDoneCallback}
-          deleteCallback={deleteCallback}
+          moveToInProgressCallback={(id) => moveToInProgressCallback(id)}
+          moveToDoneCallback={(id) => moveToDoneCallback(id)}
+          deleteCallback={(id) => deleteCallback(id)}
           addTodoCallback={addTodoCallback}
         />
         <InProgressColumn
           data={data.inProgress}
           forceUpdate={forceUpdate}
-          moveToToDo={moveToToDoCallback}
-          moveToDone={moveToDoneCallback}
-          deleteCallback={deleteCallback}
+          moveToToDoCallback={(id) => moveToToDoCallback(id)}
+          moveToDoneCallback={(id) => moveToDoneCallback(id)}
+          deleteCallback={(id) => deleteCallback(id)}
         />
         <DoneColumn
           data={data.done}
           forceUpdate={forceUpdate}
-          moveToDone={moveToToDoCallback}
-          moveToInProgress={moveToInProgressCallback}
-          deleteCallback={deleteCallback}
+          moveToToDoCallback={(id) => moveToToDoCallback(id)}
+          moveToInProgressCallback={(id) => moveToInProgressCallback(id)}
+          deleteCallback={(id) => deleteCallback(id)}
         />
       </div>
     </div>
