@@ -24,10 +24,10 @@ export function DoneColumn({
           data={data}
           border="ntr-g"
           btnText1={"Move to ToDo"}
-          btnCallback1={(id) => moveToToDoCallback(id)}
+          btnCallback1={moveToToDoCallback}
           btnText2={"Move to InProgress"}
-          btnCallback2={(id) => moveToInProgressCallback(id)}
-          deleteCallback={(id) => deleteCallback(id)}
+          btnCallback2={moveToInProgressCallback}
+          deleteCallback={deleteCallback}
         />
       </div>
     </div>

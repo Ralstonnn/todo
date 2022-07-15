@@ -24,10 +24,10 @@ export function InProgressColumn({
           data={data}
           border="ntr-y"
           btnText1={"Move to ToDo"}
-          btnCallback1={(id) => moveToToDoCallback(id)}
+          btnCallback1={moveToToDoCallback}
           btnText2={"Move to Done"}
-          btnCallback2={(id) => moveToDoneCallback(id)}
-          deleteCallback={(id) => deleteCallback(id)}
+          btnCallback2={moveToDoneCallback}
+          deleteCallback={deleteCallback}
         />
       </div>
     </div>
