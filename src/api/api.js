@@ -168,10 +168,19 @@ export class Api {
           todoColumn: item.get("todoColumn"),
           inProgressColumn: item.get("inProgressColumn"),
           doneColumn: item.get("doneColumn"),
+          updatedAt: item.get("updatedAt"),
         };
 
         resultArr.push(tempObj);
       }
+      /**
+       * Sorting by updating date so the last updated item will always be the last in a column
+       */
+      resultArr.sort((a, b) => {
+        if (a.updatedAt > b.updatedAt) return 1;
+        if (a.updatedAt < b.updatedAt) return -1;
+        return 0;
+      });
       return resultArr;
     } catch (error) {
       return {
