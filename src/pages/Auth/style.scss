@@ -1,0 +1,12 @@
+$component: "base-form-component";
+
+.#{$component}-container {
+  width: 100vw;
+  height: 100vh;
+
+  .#{$component} {
+    & > * + * {
+      margin-top: 20px;
+    }
+  }
+}

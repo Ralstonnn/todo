@@ -2,7 +2,8 @@ import { useEffect, useState, useReducer } from "react";
 import { TodoColumn } from "../../components/todoColumns/todo/TodoColumn";
 import { InProgressColumn } from "../../components/todoColumns/inProgress/InProgressColumn";
 import { DoneColumn } from "../../components/todoColumns/done/DoneColumn";
-import { Api } from "../../api/api";
+import { Api } from "../../api/api.ts";
+import { AuthSystem } from "../../api/authenticationSystem.ts";
 
 export function Home() {
   const [data, setData] = useState({});
@@ -70,6 +71,7 @@ export function Home() {
       });
 
       console.log("data fetched");
+      console.log(temp);
       setData(temp);
       if (isLoading) setIsLoading(false);
     });
@@ -103,6 +105,15 @@ export function Home() {
           moveToInProgressCallback={moveToInProgressCallback}
           deleteCallback={deleteCallback}
         />
+
+        {/* User api test */}
+        {/* <button
+          onClick={() =>
+            new AuthSystem({ login: "test", password: "test" }).getUserData()
+          }
+        >
+          GetUsers
+        </button> */}
       </div>
     </div>
   );

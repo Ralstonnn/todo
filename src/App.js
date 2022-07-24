@@ -1,5 +1,7 @@
 // STYLES
 import { Home } from "./pages/Home/Home";
+import { LoginPage } from "./pages/Auth/Login/LoginPage";
+import { RegistrationPage } from "./pages/Auth/Registration/RegistrationPage";
 import "./styles/sass/flex.scss";
 import "./styles/sass/template.scss";
 import "./styles/sass/typography.scss";
@@ -9,7 +11,9 @@ import "./styles/sass/typography.scss";
 function App() {
   return (
     <div className="container-main-100 bg-prm">
-      <Home />
+      {/* <Home /> */}
+      <LoginPage />
+      {/* <RegistrationPage /> */}
     </div>
   );
 }

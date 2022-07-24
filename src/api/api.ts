@@ -1,18 +1,37 @@
-import Parse from "parse/dist/parse.min.js";
+import Parse from "parse";
 
 const PARSE_APPLICATION_ID = process.env.REACT_APP_PARSE_APPLICATION_ID;
 const PARSE_HOST_URL = process.env.REACT_APP_PARSE_HOST_URL;
 const PARSE_JAVASCRIPT_KEY = process.env.REACT_APP_PARSE_JAVASCRIPT_KEY;
-Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_KEY);
-Parse.serverURL = PARSE_HOST_URL;
+Parse.initialize(PARSE_APPLICATION_ID || "", PARSE_JAVASCRIPT_KEY);
+Parse.serverURL = PARSE_HOST_URL || "";
+
+type TodoItem = {
+  readonly id: string;
+  text: string;
+  todoColumn: boolean;
+  inProgressColumn: boolean;
+  doneColumn: boolean;
+  readonly updatedAt: Date;
+};
+
+type TodoItems = TodoItem[];
 
 export class Api {
-  constructor({ id = null, text = null } = {}) {
-    this.objectId = id;
-    this.text = text;
+  objectId: string | undefined;
+  text: string | undefined;
+
+  constructor(
+    data: { id?: string; text?: string } = {
+      id: "",
+      text: "",
+    }
+  ) {
+    this.objectId = data.id;
+    this.text = data.text;
   }
 
-  async addTodo() {
+  async addTodo(): Promise<{ response: string; error?: any }> {
     const todo = new Parse.Object("todo");
     todo.set("text", this.text);
 
@@ -27,7 +46,9 @@ export class Api {
     }
   }
 
-  async deleteTodo() {
+  async deleteTodo(): Promise<{ response: string; error?: any } | null> {
+    if (!this.objectId) return null;
+
     const todo = new Parse.Query("todo");
 
     try {
@@ -50,7 +71,9 @@ export class Api {
     }
   }
 
-  async updateTodo() {
+  async updateTodo(): Promise<{ response: string; error?: any } | null> {
+    if (!this.objectId) return null;
+
     const todo = new Parse.Query("todo");
 
     try {
@@ -74,7 +97,9 @@ export class Api {
     }
   }
 
-  async moveToTodo() {
+  async moveToTodo(): Promise<{ response: string; error?: any } | null> {
+    if (!this.objectId) return null;
+
     const todo = new Parse.Query("todo");
 
     try {
@@ -100,7 +125,9 @@ export class Api {
     }
   }
 
-  async moveToInProgress() {
+  async moveToInProgress(): Promise<{ response: string; error?: any } | null> {
+    if (!this.objectId) return null;
+
     const todo = new Parse.Query("todo");
 
     try {
@@ -126,7 +153,9 @@ export class Api {
     }
   }
 
-  async moveToDone() {
+  async moveToDone(): Promise<{ response: string; error?: any } | null> {
+    if (!this.objectId) return null;
+
     const todo = new Parse.Query("todo");
 
     try {
@@ -152,17 +181,17 @@ export class Api {
     }
   }
 
-  async getTodos() {
+  async getTodos(): Promise<TodoItems | { response: string; error?: any }> {
     const todo = new Parse.Query("todo");
     const result = await todo.find();
-    const resultArr = [];
+    let resultArr: TodoItems = [];
 
     try {
       /**
        * Forming an array from returned object
        */
       for (const item of result) {
-        let tempObj = {
+        let tempObj: TodoItem = {
           id: item.id,
           text: item.get("text"),
           todoColumn: item.get("todoColumn"),
@@ -176,6 +205,7 @@ export class Api {
       /**
        * Sorting by updating date so the last updated item will always be the last in a column
        */
+      // TODO: Sort with db query
       resultArr.sort((a, b) => {
         if (a.updatedAt > b.updatedAt) return 1;
         if (a.updatedAt < b.updatedAt) return -1;
