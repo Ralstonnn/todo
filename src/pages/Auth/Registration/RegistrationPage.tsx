@@ -15,20 +15,20 @@ export function RegistrationPage(): JSX.Element {
   return (
     <div className="registration-page-component-container">
       <BaseAuthForm
-          usernameInpValue={user.username} 
-          usernameInpOnChange={(value: string) => setUser({
-            username: value, 
-            password: user.password
-          })}
-          passwordInpValue={user.password}
-          passwordInpOnChange={(value: string) => setUser({
-            username: user.username, 
-            password: value
-          })}
-          formSubmitHandler={submitCallback}
-          submitButtonText="Register"
-        >
-        </BaseAuthForm>
+        usernameInpValue={user.username} 
+        usernameInpOnChange={(value: string) => setUser({
+          username: value, 
+          password: user.password
+        })}
+        passwordInpValue={user.password}
+        passwordInpOnChange={(value: string) => setUser({
+          username: user.username, 
+          password: value
+        })}
+        formSubmitHandler={submitCallback}
+        submitButtonText="Register"
+      >
+      </BaseAuthForm>
     </div>
   );
 }

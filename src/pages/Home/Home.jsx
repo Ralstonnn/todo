@@ -1,20 +1,20 @@
-import { useEffect, useState, useReducer } from "react";
+import { useEffect, useState } from "react";
 import { TodoColumn } from "../../components/todoColumns/todo/TodoColumn";
 import { InProgressColumn } from "../../components/todoColumns/inProgress/InProgressColumn";
 import { DoneColumn } from "../../components/todoColumns/done/DoneColumn";
 import { Api } from "../../api/api.ts";
-import { AuthSystem } from "../../api/authenticationSystem.ts";
+import { useNavigate } from "react-router-dom";
 
 export function Home() {
+  let navigate = useNavigate();
+
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  // const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
 
   const moveToToDoCallback = (id) => {
     new Api({ id }).moveToTodo().then(async (data) => {
       if (data.response === "y") {
         await fetchData();
-        // forceUpdate();
       }
     });
   };
@@ -23,7 +23,6 @@ export function Home() {
     new Api({ id }).moveToInProgress().then(async (data) => {
       if (data.response === "y") {
         await fetchData();
-        // forceUpdate();
       }
     });
   };
@@ -32,7 +31,6 @@ export function Home() {
     new Api({ id }).moveToDone().then(async (data) => {
       if (data.response === "y") {
         await fetchData();
-        // forceUpdate();
       }
     });
   };
@@ -41,7 +39,6 @@ export function Home() {
     new Api({ id }).deleteTodo().then(async (data) => {
       if (data.response === "y") {
         await fetchData();
-        // forceUpdate();
       }
     });
   };
@@ -49,16 +46,13 @@ export function Home() {
   const addTodoCallback = (todo = "") => {
     new Api({ text: todo }).addTodo().then(async (data) => {
       if (data.response === "y") {
-        setIsLoading(true);
         await fetchData();
-        // forceUpdate();
       }
     });
   };
 
   const fetchData = async () => {
-    const result = new Api().getTodos();
-    result.then((data) => {
+    new Api().getTodos().then((data) => {
       let temp = {
         todo: [],
         inProgress: [],
@@ -70,8 +64,6 @@ export function Home() {
         else temp.done.push(item);
       });
 
-      console.log("data fetched");
-      console.log(temp);
       setData(temp);
       if (isLoading) setIsLoading(false);
     });
@@ -81,10 +73,23 @@ export function Home() {
     if (isLoading) fetchData();
   }, []);
 
-  if (isLoading) return;
+  if (isLoading) return null;
   return (
-    <div className="home-component-container container-1344 flex">
+    <div className="home-component-container container-1344 flex flex-o-vertical">
+      <div className="m-b-20 flex flex-j-end flex-a-center">
+        <div className="text-s4">{localStorage.getItem("username")}</div>
+        <button
+          className="border-r-10 m-l-20 text-s4"
+          onClick={() => {
+            localStorage.removeItem("userId");
+            navigate("/login");
+          }}
+        >
+          Logout
+        </button>
+      </div>
       {console.log("update")}
+      {/* TODO: Check ng margin */}
       <div className="flex-item flex-item-1 flex flex-wrap m-ng-5">
         <TodoColumn
           data={data.todo}

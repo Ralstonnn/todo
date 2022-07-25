@@ -7,12 +7,23 @@ $component: "todo-item-component";
   border-left-width: 4px;
   border-style: solid;
   cursor: pointer;
-  opacity: 0;
+  opacity: 1;
   transition: opacity $duration-base ease-out;
 
   &[data-fade-in="true"] {
-    opacity: 1;
-    transition: opacity $duration-base ease-in;
+    animation: fadeIn 1s;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 
   &[data-active="false"] {

@@ -34,6 +34,7 @@ export class Api {
   async addTodo(): Promise<{ response: string; error?: any }> {
     const todo = new Parse.Object("todo");
     todo.set("text", this.text);
+    todo.set("userId", localStorage.getItem("userId"));
 
     try {
       await todo.save();
@@ -182,8 +183,9 @@ export class Api {
   }
 
   async getTodos(): Promise<TodoItems | { response: string; error?: any }> {
-    const todo = new Parse.Query("todo");
-    const result = await todo.find();
+    const query = new Parse.Query("todo");
+    query.equalTo("userId", localStorage.getItem("userId"));
+    const result = await query.find();
     let resultArr: TodoItems = [];
 
     try {

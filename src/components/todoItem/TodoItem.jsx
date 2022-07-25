@@ -10,6 +10,7 @@ export function TodoItem({
   btnCallback1,
   btnCallback2,
   deleteCallback,
+  dataFadeIn,
 }) {
   const todoItem = useRef(null);
   const expandable = useRef(null);
@@ -23,9 +24,7 @@ export function TodoItem({
   }, []);
 
   useEffect(() => {
-    setTimeout(() => {
-      todoItem.current.dataset.fadeIn = "true";
-    }, 10);
+    todoItem.current.dataset.active = "true";
   });
 
   return (
@@ -37,6 +36,7 @@ export function TodoItem({
         expandable.current.dataset.expanded = isExpanded ? "false" : "true";
         expand.current.dataset.expanded = isExpanded ? "false" : "true";
       }}
+      data-fade-in={dataFadeIn}
       ref={todoItem}
     >
       <div className="flex-item flex-item-1 flex">

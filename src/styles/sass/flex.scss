@@ -7,17 +7,21 @@
     &-center {
       align-items: center;
     }
+    &-end {
+      align-items: flex-end;
+    }
   }
 
   &.flex-j {
     &-center {
       justify-content: center;
     }
-
+    &-end {
+      justify-content: end;
+    }
     &-space-between {
       justify-content: space-between;
     }
-
     &-space-evenly {
       justify-content: space-evenly;
     }

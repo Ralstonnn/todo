@@ -13,8 +13,9 @@ type UserLoginData = {
 
 type UserCredentials = {
   readonly id: string;
+  username: string;
   name?: string;
-  email: string;
+  email?: string;
 };
 
 export class AuthSystem {
@@ -42,7 +43,7 @@ export class AuthSystem {
   async userSignIn(): Promise<{
     response: string;
     error?: any;
-    user?: { id: string };
+    user?: UserCredentials;
   }> {
     try {
       let user: Parse.User = await Parse.User.logIn(
@@ -50,7 +51,10 @@ export class AuthSystem {
         this.password
       );
 
-      return { response: "y", user: { id: user.id } };
+      return {
+        response: "y",
+        user: { id: user.id, username: user.get("username") },
+      };
     } catch (error) {
       return { response: "n", error };
     }

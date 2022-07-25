@@ -26,9 +26,9 @@ function BaseAuthForm({
   children
 }: Props): JSX.Element {
   return (
-    <div className="base-form-component-container flex flex-a-center flex-j-center ">
+    <div className="base-auth-form-component-container flex flex-a-center flex-j-center ">
       <form 
-        className="base-form-component p-50 bg-prm-d border-r-10 flex 
+        className="base-auth-form-component p-50 bg-prm-d border-r-10 flex 
           flex-o-vertical flex-a-center"
         onSubmit={(e: React.FormEvent) => formSubmitHandler(e)}
       >
@@ -39,6 +39,7 @@ function BaseAuthForm({
           type="text" 
           name="username" 
           id="login-page-username-inp" 
+          placeholder="Username"
         />
         <input 
           className="border-r-5" 
@@ -47,6 +48,7 @@ function BaseAuthForm({
           type="password" 
           name="password" 
           id="login-page-username-pass" 
+          placeholder="Password"
         />
         {children}
         <button type="submit">{submitButtonText}</button>

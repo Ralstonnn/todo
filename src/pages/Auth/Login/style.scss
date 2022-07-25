@@ -1,4 +1,15 @@
 $component: "login-page-component";
 
 .#{$component}-container {
+  .registration-link {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    font-size: medium;
+    color: white;
+
+    &:hover {
+      color: gray;
+    }
+  }
 }

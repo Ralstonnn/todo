@@ -192,6 +192,12 @@ h6,
   white-space: nowrap;
 }
 
+.ui-link {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}
+
 // COLORS
 @each $name, $value in $colors {
   .bg-#{$name} {
