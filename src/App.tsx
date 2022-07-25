@@ -19,6 +19,7 @@ function App() {
   useEffect(() => {
     setIsLoggedIn(localStorage.getItem("userId") === null ? false : true)
     if (isLoggedIn) navigate('/')
+    // eslint-disable-next-line
   }, [localStorage.getItem("userId")])
 
   return (
