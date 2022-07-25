@@ -88,7 +88,6 @@ export function Home() {
           Logout
         </button>
       </div>
-      {console.log("update")}
       {/* TODO: Check ng margin */}
       <div className="flex-item flex-item-1 flex flex-wrap m-ng-5">
         <TodoColumn
@@ -110,15 +109,6 @@ export function Home() {
           moveToInProgressCallback={moveToInProgressCallback}
           deleteCallback={deleteCallback}
         />
-
-        {/* User api test */}
-        {/* <button
-          onClick={() =>
-            new AuthSystem({ login: "test", password: "test" }).getUserData()
-          }
-        >
-          GetUsers
-        </button> */}
       </div>
     </div>
   );

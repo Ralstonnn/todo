@@ -16,7 +16,6 @@ export function TodoItemContainer({
   const [itemsJSX, setItemsJSX] = useState([]);
 
   useEffect(() => {
-    console.log("data changed");
     setItemsJSX(
       data.map((item, i) => (
         <TodoItem
@@ -40,7 +39,6 @@ export function TodoItemContainer({
       className={`todo-item-container-component
         flex-item flex-item-1 flex flex-o-vertical ${className}`}
     >
-      {console.log(itemsJSX)}
       {itemsJSX}
     </div>
   );
