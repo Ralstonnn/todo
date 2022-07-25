@@ -32,6 +32,7 @@ export function TodoItemContainer({
       ))
     );
     setItemsId(data.map((item) => item.id));
+    // eslint-disable-next-line
   }, [data]);
 
   return (

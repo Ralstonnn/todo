@@ -71,6 +71,7 @@ export function Home() {
 
   useEffect(() => {
     if (isLoading) fetchData();
+    // eslint-disable-next-line
   }, []);
 
   if (isLoading) return null;
